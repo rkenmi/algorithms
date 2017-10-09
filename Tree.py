@@ -1,22 +1,33 @@
-class ListNode(object):
-    def __init__(self, data=0, next_node=None):
+class BinaryTree(object):
+    def __init__(self, data=0, left=None, right=None):
         self.data = data
-        self.next = next_node
+        self.left = left
+        self.right = right
 
 
     def print_all(self):
-        temp = self
-        to_print = []
+        tree = self
+        stack = [tree]
+        while len(stack) > 0:  # iterative pre-order traversal
+            tree = stack.pop()
+            print(tree.data)
+            if tree.right:
+                stack.append(tree.right)
+            if tree.left:
+                stack.append(tree.left)
 
-        while temp:
-            to_print.append(str(temp.data))
-            temp = temp.next
 
-        print(" => ".join(to_print))
+sample = BinaryTree(0)
+sample.left = BinaryTree(1)
+sample.right = BinaryTree(2)
+sample.left.left = BinaryTree(3)
+sample.left.right = BinaryTree(4)
+# sample.left.left.left = BinaryTree(5)
 
-sample = ListNode()
-sample.next = ListNode(1)
-sample.next.next = ListNode(2)
-sample.next.next.next = ListNode(3)
-sample.next.next.next.next = ListNode(4)
-sample.next.next.next.next.next = ListNode(5)
+
+symmetric_tree = BinaryTree(0)
+symmetric_tree.left = BinaryTree(1)
+symmetric_tree.left.left = BinaryTree(2)
+symmetric_tree.right = BinaryTree(1)
+symmetric_tree.right.right = BinaryTree(2)
+
