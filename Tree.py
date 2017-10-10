@@ -4,6 +4,13 @@ class BinaryTree(object):
         self.left = left
         self.right = right
 
+    def has_value(self, tree):
+        if tree is None:
+            return False
+
+        return self.data is tree.data
+
+
 
     def print_all(self):
         tree = self
