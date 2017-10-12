@@ -10,17 +10,20 @@ def to_snake_case(name):
 class Algorithm(object):
     def __init__(self):
         self.name = name = to_snake_case(self.__class__.__name__)
+        self.functions = []
 
         # Import relevant functions from the algorithm module
         try:
             module = importlib.import_module(name)
             for s in dir(module):
                 if callable(getattr(module, s)) and s.startswith(self.name):
-                    setattr(self, s, getattr(module, s))
+                    fcn = getattr(module, s)
+                    self.functions.append(fcn)
+                    setattr(self, s, fcn)
 
         except TypeError as e:
             logger.error("{}: {}".format(name, e.message))
 
     def get_functions(self):
-        return [func for func in dir(self) if callable(getattr(self, func)) and func.startswith(self.name)]
+        return self.functions
 
