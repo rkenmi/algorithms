@@ -69,7 +69,7 @@ def does_overlap_fast(ll_a, ll_b):
 
 def does_overlap_w_cycles(ll_a, ll_b):
     """
-    Handles detection of linked lists with cycles and returns the starting node of the cycle.
+    Handles detection of linked array_lists with cycles and returns the starting node of the cycle.
 
     i.e.
 

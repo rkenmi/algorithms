@@ -1,14 +1,8 @@
 import unittest
 
-from Tree import BinaryTree
-from longest_increasing_subsequence import longest_increasing_subsequence
-from tree_operations import is_symmetric_naive as is_symmetric
-
-
-class Lists(unittest.TestCase):
-    def test_longest_increasing_subsequence(self):
-        self.assertEquals(6, longest_increasing_subsequence([-9, -4, 8, -2, 1, 4, -1, 3, 4]))
-        self.assertEquals(2, longest_increasing_subsequence([-9, -4, 8, -2, 1, 4, -1, 3, 4]))
+from trees.least_common_ancestor import least_common_ancestor
+from trees.Tree import BinaryTree
+from trees.is_symmetric import is_symmetric
 
 class Trees(unittest.TestCase):
 
@@ -18,6 +12,7 @@ class Trees(unittest.TestCase):
         sample.right = BinaryTree(2)
         sample.left.left = BinaryTree(3)
         sample.left.right = BinaryTree(4)
+        sample.left.left.left = BinaryTree(5)
         return sample
 
     def build_symmetric_tree(self):
@@ -53,6 +48,11 @@ class Trees(unittest.TestCase):
         unsymmetric_tree = self.build_unsymmetric_tree()
         self.assertEqual(False, is_symmetric(unsymmetric_tree))
 
+    def test_lca(self):
+        tree = self.build_basic_tree()
+        self.assertEqual(tree.left, least_common_ancestor(tree, tree.left.left, tree.left.right))
+        self.assertEqual(tree, least_common_ancestor(tree, tree.left.left, tree.right))
+        self.assertEqual(tree.left.left, least_common_ancestor(tree, tree.left.left.left, tree.left.left))
 
 
 if __name__ == '__main__':
