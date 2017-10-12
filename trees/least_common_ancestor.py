@@ -30,7 +30,7 @@ def least_common_ancestor(root, node1, node2):
 
     if root is node1 or root is node2:
         return root
-    
+
     left = least_common_ancestor(root.left, node1, node2)
     right = least_common_ancestor(root.right, node1, node2)
     if left and right:

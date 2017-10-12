@@ -3,42 +3,39 @@ import collections
 from Algorithm import Algorithm
 
 
-def least_common_ancestor_namedtuple(root, node1, node2):
-    Status = collections.namedtuple("Status", ["num_matches", "ancestor"])
+def least_common_ancestor_parents(node1, node2):
+    """
+    Compute LCA when each node has a pointer to a parent. Root node isn't necessary in this case.
+    :param node1:
+    :param node2:
+    :return:
+    """
 
-    def lca(root, node1, node2):
-        if root is None:
-            return Status(0, None)
+    def get_depth(node):
+        if node is None:
+            return -1
 
-        left = lca(root.left, node1, node2)
-        if left.num_matches is 2:
-            return left
-
-        right = lca(root.right, node1, node2)
-        if right.num_matches is 2:
-            return right
-
-        num_matches = left.num_matches + right.num_matches + int(root in (node1, node2))
-        return Status(num_matches, root if num_matches == 2 else None)
-
-    return lca(root, node1, node2).ancestor
+        return get_depth(node.parent) + 1
 
 
-def least_common_ancestor(root, node1, node2):
-    if root is None:
-        return None
+    node1_h = get_depth(node1)
+    node2_h = get_depth(node2)
 
-    if root is node1 or root is node2:
-        return root
+    if node1_h > node2_h:
+        # make node1's depth smaller, always
+        node1_h, node2_h = node2_h, node1_h
+        node1, node2 = node2, node1
 
-    left = least_common_ancestor(root.left, node1, node2)
-    right = least_common_ancestor(root.right, node1, node2)
-    if left and right:
-        return root  # root must be the ancestor if left and right both point to a node respectively
-    elif left or right:
-        return left or right  # if only one child is a match, return that child
+    for _ in range(node2_h - node1_h):
+        node2 = node2.parent
+
+    while node1 is not node2:
+        node1 = node1.parent
+        node2 = node2.parent
+
+    return node1
 
 
-class LeastCommonAncestor(Algorithm):
+class LeastCommonAncestorParents(Algorithm):
     pass
 

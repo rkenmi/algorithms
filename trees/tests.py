@@ -3,6 +3,8 @@ import unittest
 from trees.least_common_ancestor import least_common_ancestor, LeastCommonAncestor
 from trees.Tree import BinaryTree
 from trees.is_symmetric import is_symmetric
+from trees.least_common_ancestor_parents import LeastCommonAncestorParents
+
 
 class Trees(unittest.TestCase):
 
@@ -13,6 +15,20 @@ class Trees(unittest.TestCase):
         sample.left.left = BinaryTree(3)
         sample.left.right = BinaryTree(4)
         sample.left.left.left = BinaryTree(5)
+        return sample
+
+    def build_basic_tree_parents(self):
+        sample = BinaryTree(0)
+        sample.left = BinaryTree(1)
+        sample.left.parent = sample
+        sample.right = BinaryTree(2)
+        sample.right.parent = sample
+        sample.left.left = BinaryTree(3)
+        sample.left.left.parent = sample.left
+        sample.left.right = BinaryTree(4)
+        sample.left.right.parent = sample.left
+        sample.left.left.left = BinaryTree(5)
+        sample.left.left.left.parent = sample.left.left
         return sample
 
     def build_symmetric_tree(self):
@@ -55,6 +71,14 @@ class Trees(unittest.TestCase):
             self.assertEqual(tree.left, algo(tree, tree.left.left, tree.left.right))
             self.assertEqual(tree, algo(tree, tree.left.left, tree.right))
             self.assertEqual(tree.left.left, algo(tree, tree.left.left.left, tree.left.left))
+
+    def test_lca_parents(self):
+        tree = self.build_basic_tree_parents()
+        lca = LeastCommonAncestorParents()
+        for algo in lca.get_functions():
+            self.assertEqual(tree.left,algo(tree.left.left, tree.left.right))
+            self.assertEqual(tree, algo(tree.left.left, tree.right))
+            self.assertEqual(tree.left.left, algo(tree.left.left.left, tree.left.left))
 
     def test_class(self):
         lca = LeastCommonAncestor()

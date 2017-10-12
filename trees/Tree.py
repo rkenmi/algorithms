@@ -1,16 +1,15 @@
 class BinaryTree(object):
-    def __init__(self, data=0, left=None, right=None):
+    def __init__(self, data=0, left=None, right=None, parent=None):
         self.data = data
         self.left = left
         self.right = right
+        self.parent = parent
 
     def has_value(self, tree):
         if tree is None:
             return False
 
         return self.data is tree.data
-
-
 
     def print_all(self):
         tree = self
