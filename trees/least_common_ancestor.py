@@ -1,6 +1,9 @@
 import collections
 
-def least_common_ancestor_ntuple(root, node1, node2):
+from Algorithm import Algorithm
+
+
+def least_common_ancestor_namedtuple(root, node1, node2):
     Status = collections.namedtuple("Status", ["num_matches", "ancestor"])
 
     def lca(root, node1, node2):
@@ -20,6 +23,7 @@ def least_common_ancestor_ntuple(root, node1, node2):
 
     return lca(root, node1, node2).ancestor
 
+
 def least_common_ancestor(root, node1, node2):
     if root is None:
         return None
@@ -33,4 +37,8 @@ def least_common_ancestor(root, node1, node2):
             return root  # root must be the ancestor if left and right both point to a node respectively
         elif left or right:
             return left or right  # if only one child is a match, return that child
+
+
+class LeastCommonAncestor(Algorithm):
+    pass
 
