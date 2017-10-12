@@ -30,13 +30,13 @@ def least_common_ancestor(root, node1, node2):
 
     if root is node1 or root is node2:
         return root
-    else:
-        left = least_common_ancestor(root.left, node1, node2)
-        right = least_common_ancestor(root.right, node1, node2)
-        if left and right:
-            return root  # root must be the ancestor if left and right both point to a node respectively
-        elif left or right:
-            return left or right  # if only one child is a match, return that child
+    
+    left = least_common_ancestor(root.left, node1, node2)
+    right = least_common_ancestor(root.right, node1, node2)
+    if left and right:
+        return root  # root must be the ancestor if left and right both point to a node respectively
+    elif left or right:
+        return left or right  # if only one child is a match, return that child
 
 
 class LeastCommonAncestor(Algorithm):
