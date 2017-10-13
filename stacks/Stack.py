@@ -1,8 +1,14 @@
 
 class Stack:
+    """
+    A basic implementation (there are much better ones out there)
+    """
     def __init__(self):
         self._stack = []
         self._max_stack = []
+
+    def is_empty(self):
+        return len(self._stack) is 0
 
     def push(self, e):
         self._stack.append(e)
@@ -15,9 +21,6 @@ class Stack:
             self._max_stack.pop()
 
         return e
-
-    def empty(self):
-        return len(self._stack) is 0
 
     def max(self):
         return self._max_stack[-1]
