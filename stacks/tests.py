@@ -1,7 +1,7 @@
 import unittest
 
 from stacks.Stack import Stack
-from stacks.well_formed_brackets import WellFormedBrackets
+from stacks.well_formed_brackets_stacks import WellFormedBracketsStacks
 
 
 class Stacks(unittest.TestCase):
@@ -54,7 +54,7 @@ class Stacks(unittest.TestCase):
 
 class StacksAlgorithms(unittest.TestCase):
     def test_well_formed_brackets(self):
-        wfb = WellFormedBrackets()
+        wfb = WellFormedBracketsStacks()
         for algo in wfb.get_functions():
             self.assertEqual(True, algo(""))
             self.assertEqual(False, algo("{"))

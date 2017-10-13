@@ -3,6 +3,12 @@ from stacks.Stack import Stack
 
 
 def well_formed_brackets(s):
+    """
+    A string of brackets is well-formed if they are closed in the correct order
+    i.e. [{()}] is well formed, but [}](){ is not.
+    :param s: string
+    :return: boolean
+    """
     lookup = {
         '{': '}',
         '[': ']',
@@ -19,5 +25,5 @@ def well_formed_brackets(s):
     return left_chars.is_empty()
 
 
-class WellFormedBrackets(Algorithm):
+class WellFormedBracketsStacks(Algorithm):
     pass
