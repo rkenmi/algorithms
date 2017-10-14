@@ -1,4 +1,20 @@
+import bisect
+
 from Algorithm import Algorithm
+
+
+def binary_search_first_naive(A, target):
+    index_of_target = bisect.bisect_left(A, target)
+
+    if not (0 <= index_of_target < len(A)):
+        return -1  # bisect_left returns different index if it fails, so catch it and return expected index
+
+    first_occurence = -1
+    for i in range(index_of_target, -1, -1):  # reverse iterate
+        if A[i] is A[index_of_target]:
+            first_occurence = i
+
+    return first_occurence
 
 
 def binary_search_first(A, target):

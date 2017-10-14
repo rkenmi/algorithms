@@ -2,6 +2,13 @@ import heapq
 
 from Algorithm import Algorithm
 
+def merge_sorted_sequences_naive(sequences):
+    # doesn't actually use heaps, but its the easiest way
+    result = []
+    for seq in sequences:
+        result.extend(seq)
+
+    return sorted(result)
 
 def merge_sorted_sequences(sequences):
     heap = []
@@ -17,7 +24,7 @@ def merge_sorted_sequences(sequences):
         for seq in sequences:
             if i < len(seq):
                 # keep heap at most size k, for k = # of sequences
-                result.append(heapq.heappushpop(heap, seq[i]))
+                result.append(heapq.heappushpop(heap, seq[i]))  # note the push THEN pop
         i += 1
 
     while len(heap) > 0:  # while heap isn't empty
