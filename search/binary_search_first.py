@@ -1,8 +1,5 @@
 import bisect
 
-from Algorithm import Algorithm
-
-
 def binary_search_first_naive(A, target):
     index_of_target = bisect.bisect_left(A, target)
 
@@ -44,5 +41,3 @@ def binary_search_first(A, target):
 
     return binary_search(A, 0, len(A)-1, target)
 
-class BinarySearchFirst(Algorithm):
-    pass

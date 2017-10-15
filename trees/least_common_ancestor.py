@@ -1,7 +1,5 @@
 import collections
 
-from Algorithm import Algorithm
-
 
 def least_common_ancestor_namedtuple(root, node1, node2):
     Status = collections.namedtuple("Status", ["num_matches", "ancestor"])
@@ -37,8 +35,4 @@ def least_common_ancestor(root, node1, node2):
         return root  # root must be the ancestor if left and right both point to a node respectively
     elif left or right:
         return left or right  # if only one child is a match, return that child
-
-
-class LeastCommonAncestor(Algorithm):
-    pass
 

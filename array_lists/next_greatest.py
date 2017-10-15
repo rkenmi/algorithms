@@ -1,6 +1,5 @@
 import math
 
-from Algorithm import Algorithm
 
 def next_greatest_naive(A):
     """
@@ -27,7 +26,6 @@ def next_greatest_naive(A):
                 break
 
     return record
-
 
 
 def next_greatest(A):
@@ -64,7 +62,4 @@ def next_greatest(A):
         stack.append(elem)
 
     return record
-
-class NextGreatest(Algorithm):
-    pass
 

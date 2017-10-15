@@ -1,12 +1,12 @@
 import unittest
 
-from heaps.merge_sorted_sequences import MergeSortedSequences
+from heaps import merge_sorted_sequences
+from utils import algorithms
 
 
 class Heaps(unittest.TestCase):
     def test_merge_sorted_sequences(self):
-        mss = MergeSortedSequences()
-        for algo in mss.get_functions():
+        for algo in algorithms(merge_sorted_sequences):
             sequences = [
                 [1, 3, 5],
                 [2, 6],

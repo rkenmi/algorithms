@@ -1,9 +1,10 @@
 import unittest
 
-from trees.least_common_ancestor import least_common_ancestor, LeastCommonAncestor
 from trees.Tree import BinaryTree
 from trees.is_symmetric import is_symmetric
-from trees.least_common_ancestor_parents import LeastCommonAncestorParents
+from trees import least_common_ancestor
+from trees import least_common_ancestor_parents
+from utils import algorithms
 
 
 class Trees(unittest.TestCase):
@@ -66,24 +67,17 @@ class Trees(unittest.TestCase):
 
     def test_lca(self):
         tree = self.build_basic_tree()
-        lca = LeastCommonAncestor()
-        for algo in lca.get_functions():
+        for algo in algorithms(least_common_ancestor):
             self.assertEqual(tree.left, algo(tree, tree.left.left, tree.left.right))
             self.assertEqual(tree, algo(tree, tree.left.left, tree.right))
             self.assertEqual(tree.left.left, algo(tree, tree.left.left.left, tree.left.left))
 
     def test_lca_parents(self):
         tree = self.build_basic_tree_parents()
-        lca = LeastCommonAncestorParents()
-        for algo in lca.get_functions():
+        for algo in algorithms(least_common_ancestor_parents):
             self.assertEqual(tree.left,algo(tree.left.left, tree.left.right))
             self.assertEqual(tree, algo(tree.left.left, tree.right))
             self.assertEqual(tree.left.left, algo(tree.left.left.left, tree.left.left))
-
-    def test_class(self):
-        lca = LeastCommonAncestor()
-        self.assertEqual(["least_common_ancestor", "least_common_ancestor_namedtuple"],
-                         [x.__name__ for x in lca.get_functions()])
 
 
 if __name__ == '__main__':

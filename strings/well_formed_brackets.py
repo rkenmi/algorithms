@@ -1,4 +1,3 @@
-from Algorithm import Algorithm
 from stacks.Stack import Stack
 
 
@@ -24,6 +23,3 @@ def well_formed_brackets(s):
 
     return not left_chars
 
-
-class WellFormedBrackets(Algorithm):
-    pass

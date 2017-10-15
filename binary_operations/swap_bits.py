@@ -1,6 +1,3 @@
-from Algorithm import Algorithm
-
-
 def swap_bits_xor(n, i, j):
     """
     Given a 64-bit integer n, swap bits i and j
@@ -48,5 +45,3 @@ def swap_bits(n, i, j):
 
     return n
 
-class SwapBits(Algorithm):
-    pass

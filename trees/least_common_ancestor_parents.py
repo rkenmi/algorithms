@@ -1,7 +1,5 @@
 import collections
 
-from Algorithm import Algorithm
-
 
 def least_common_ancestor_parents(node1, node2):
     """
@@ -34,8 +32,4 @@ def least_common_ancestor_parents(node1, node2):
         node2 = node2.parent
 
     return node1
-
-
-class LeastCommonAncestorParents(Algorithm):
-    pass
 

@@ -1,10 +1,11 @@
 import unittest
 
 from stacks.Stack import Stack
-from stacks.well_formed_brackets_stacks import WellFormedBracketsStacks
+from stacks import well_formed_brackets_stacks
+from utils import algorithms
 
 
-class Stacks(unittest.TestCase):
+class StacksContainer(unittest.TestCase):
     def test_stack_basic_push_pop(self):
         s = Stack()
         s.push(1)
@@ -54,8 +55,7 @@ class Stacks(unittest.TestCase):
 
 class StacksAlgorithms(unittest.TestCase):
     def test_well_formed_brackets(self):
-        wfb = WellFormedBracketsStacks()
-        for algo in wfb.get_functions():
+        for algo in algorithms(well_formed_brackets_stacks):
             self.assertEqual(True, algo(""))
             self.assertEqual(False, algo("{"))
             self.assertEqual(False, algo("[)"))

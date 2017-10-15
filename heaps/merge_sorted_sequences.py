@@ -1,6 +1,5 @@
 import heapq
 
-from Algorithm import Algorithm
 
 def merge_sorted_sequences_naive(sequences):
     # doesn't actually use heaps, but its the easiest way
@@ -62,5 +61,3 @@ def merge_sorted_sequences_iters(sequences):
     return result
 
 
-class MergeSortedSequences(Algorithm):
-    pass

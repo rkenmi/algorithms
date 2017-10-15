@@ -1,12 +1,12 @@
 import unittest
 
-from binary_operations.swap_bits import SwapBits
+from binary_operations import swap_bits
+from utils import algorithms
 
 
 class BinaryOperations(unittest.TestCase):
     def test_swap_bits(self):
-        sb = SwapBits()
-        for algo in sb.get_functions():
+        for algo in algorithms(swap_bits):
             self.assertEqual(0, algo(0, 2, 1))
             self.assertEqual(8, algo(16, 4, 3))
             self.assertEqual(6, algo(6, 0, 3))

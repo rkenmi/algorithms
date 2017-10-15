@@ -1,17 +1,17 @@
 import unittest
 
-from array_lists.longest_increasing_subsequence import longest_increasing_subsequence
-from array_lists.next_greatest import NextGreatest
+# from array_lists import longest_increasing_subsequence
+from array_lists import next_greatest
+from utils import algorithms
 
 
 class Lists(unittest.TestCase):
-    def test_longest_increasing_subsequence(self):
-        self.assertEquals(6, longest_increasing_subsequence([-9, -4, 8, -2, 1, 4, -1, 3, 4]))
-        self.assertEquals(2, longest_increasing_subsequence([-9, -4, 8, -2, 1, 4, -1, 3, 4]))
+    # def test_longest_increasing_subsequence(self):
+    #     self.assertEquals(6, longest_increasing_subsequence([-9, -4, 8, -2, 1, 4, -1, 3, 4]))
+    #     self.assertEquals(2, longest_increasing_subsequence([-9, -4, 8, -2, 1, 4, -1, 3, 4]))
 
     def test_next_greatest(self):
-        ng = NextGreatest()
-        for algo in ng.get_functions():
+        for algo in algorithms(next_greatest):
             self.assertDictEqual({
                 1: 9,
                 3: 9,
