@@ -5,5 +5,6 @@ def longest_increasing_subsequence(A):
             if A[j] <= A[i]:
                 dynamic_arr[i] = max(dynamic_arr[i], dynamic_arr[j] + 1)
 
+
     return dynamic_arr[-1]
 

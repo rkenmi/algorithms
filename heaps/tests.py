@@ -19,22 +19,6 @@ class Heaps(unittest.TestCase):
                 [10, 12, 14],
                 [5, 7, 15],
             ]
-            """
-            1st pass [-5, 5, 10]
-            
-            [-5, 5, 10, 20]
-            out: -5 
-            [5, 10, 20]
-            [5, 10, 12, 20]
-            
-            out: -5, 5
-            [10, 12, 20]
-            [7, 10, 12, 20]
-            
-            out: -5, 5, 7
-            [7, 12, 20]
-            
-            """
             self.assertEqual([-5, 5, 7, 10, 12, 14, 15, 20], algo(sequences))
 
             sequences = [
@@ -55,6 +39,14 @@ class Heaps(unittest.TestCase):
                 [1, 2, 3],
             ]
             self.assertEqual([1, 2, 2, 3, 3, 5], algo(sequences))
+
+            sequences = [
+                [0, 1, 2],
+                [300, 310, 320],
+                [99, 100, 101],
+                [-100, -50, 0, 50, 100, 150]
+            ]
+            self.assertEqual([-100, -50, 0, 0, 1, 2, 50, 99, 100, 100, 101, 150, 300, 310, 320], algo(sequences))
 
 
 if __name__ == '__main__':

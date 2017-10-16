@@ -31,7 +31,7 @@ class BinarySearch(unittest.TestCase):
             self.assertEqual(4, algo(16))
             self.assertEqual(3, algo(15))
             self.assertEqual(9, algo(99))
-            self.assertEqual(100, algo(100))
+            self.assertEqual(10, algo(100))
 
 if __name__ == '__main__':
     unittest.main()
