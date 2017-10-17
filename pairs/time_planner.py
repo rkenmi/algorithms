@@ -1,13 +1,5 @@
 """
-
-
-slotsA = [[10, 20], [25, 40]]
-slotsB = [[0, 10], [20, 30], [30, 45]]
-dur = 8
-
-[[0, 10], [10, 20], [20, 30], [25, 40], [30, 45]]
-
-
+    Key takeaway is look at your inputs carefully. Realize that it is sorted and take advantage of it.
 """
 import heapq
 
@@ -43,13 +35,14 @@ def time_planner(slotsA, slotsB, dur):
                 otherwise None if no meeting can be made
     """
     slotsAB = heapq.merge(slotsA, slotsB)
+    prev_slot = None
     for slot in slotsAB:
-        next_slot = next(slotsAB, None)
-        if next_slot is not None:
-            start = max(slot[0], next_slot[0])
-            end = min(slot[1], next_slot[1])
+        if prev_slot is not None:
+            start = max(slot[0], prev_slot[0])
+            end = min(slot[1], prev_slot[1])
             if end - start >= dur:
                 return [start, start + dur]
+        prev_slot = slot
     return None
 
 
@@ -79,28 +72,4 @@ def time_planner_fast(slotsA, slotsB, dur):
             j += 1
 
     return None
-
-# def time_planner_naive_imp(slotsA, slotsB, dur):
-#     if not slotsA or not slotsB:
-#         return None
-#
-#     i_B = 0
-#     for slotA in slotsA:
-#         if slotA[1] - slotA[0] >= dur:
-#             if slotsB[i_B][1] < slotA[0]:
-#                 i_B += 1
-#             elif slotsB[i_B][0] >= slotA[1]:
-#                 continue
-#
-#             if i_B >= len(slotsB):
-#                 return None
-#
-#             start = max(slotsB[i_B][0], slotA[0])
-#             end = min(slotsB[i_B][1], slotA[1])
-#             if end - start >= dur:
-#                 return [slotsB[i_B][0], slotsB[i_B][0] + dur]
-#
-#
-#     return None
-#
 
