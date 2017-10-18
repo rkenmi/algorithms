@@ -7,15 +7,19 @@ def has_cycle(head):
         slow, fast = slow.next, fast.next.next
         if slow == fast:
             temp = slow
-            count = 0
+            cycle_size = 0
+
+            # find out the size of the cycle
             while temp:
                 temp = temp.next
-                count += 1
+                cycle_size += 1
                 if temp == slow:
                     break
 
+            # have one pointer be ahead of the other by `cycle_size` nodes.
+            # this guarantees that if they collide in the cycle, that location would be the start node
             loop_start = head
-            for _ in range(count):
+            for _ in range(cycle_size):
                 loop_start = loop_start.next
 
             start = head
@@ -98,19 +102,6 @@ def does_overlap_w_cycles(ll_a, ll_b):
         return does_overlap_fast(ll_a, ll_b)
     elif (ll_a_cycle and not ll_b_cycle) or (ll_b_cycle and not ll_a_cycle):  # if one list is cyclic and other is not, there is no overlap
         return None
-
-    """
-    if ll_a and ll_b are both cyclic,
-    then either:
-    
-    - they go to the same shared cycle at the same entrance node
-        - find where the cycle starts
-    - they go to the same shared cycle at a different entrance node (like in example above)
-        - return either starting location (of list a or list b)
-    - they have different cycles altogether; no overlap
-        - return None (how to check?)
-    """
-
 
     temp = ll_b_cycle
     while True:
