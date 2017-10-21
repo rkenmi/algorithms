@@ -1,13 +1,14 @@
 import unittest
 
-from trees.Tree import BinaryTree
+from trees.Tree import BinaryTree, BinarySearchTree
+from trees.get_height import get_height
 from trees.is_symmetric import is_symmetric
 from trees import least_common_ancestor
 from trees import least_common_ancestor_parents
 from utils import algorithms
 
 
-class Trees(unittest.TestCase):
+class BinaryTrees(unittest.TestCase):
 
     def build_basic_tree(self):
         sample = BinaryTree(0)
@@ -78,6 +79,42 @@ class Trees(unittest.TestCase):
             self.assertEqual(tree.left,algo(tree.left.left, tree.left.right))
             self.assertEqual(tree, algo(tree.left.left, tree.right))
             self.assertEqual(tree.left.left, algo(tree.left.left.left, tree.left.left))
+
+
+class BinarySearchTrees(unittest.TestCase):
+    def build_basic_tree(self):
+        sample = BinarySearchTree(3)
+        sample.add(BinaryTree(2))
+        sample.add(BinaryTree(4))
+        sample.add(BinaryTree(1))
+        sample.add(BinaryTree(5))
+        return sample
+
+    def build_big_tree(self):
+        sample = BinarySearchTree(10)
+        sample.add(BinaryTree(3))
+        sample.add(BinaryTree(50))
+        sample.add(BinaryTree(20))
+        sample.add(BinaryTree(35))
+        sample.add(BinaryTree(55))
+        sample.add(BinaryTree(15))
+        sample.add(BinaryTree(11))
+        return sample
+
+    def test_get(self):
+        bst = self.build_basic_tree()
+        self.assertEqual(5, bst.get(5).data)
+        self.assertEqual(None, bst.get(6))
+
+    def test_remove(self):
+        bst = self.build_big_tree()
+        self.assertEqual(5, get_height(bst))
+        self.assertEqual(50, bst.remove(50).data)
+        self.assertEqual(3, bst.remove(3).data)
+        self.assertEqual(55, bst.remove(55).data)
+
+        self.assertEqual(11, bst.remove(11).data)
+        self.assertEqual(4, get_height(bst))
 
 
 if __name__ == '__main__':

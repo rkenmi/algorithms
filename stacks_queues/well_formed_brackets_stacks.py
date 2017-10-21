@@ -1,4 +1,4 @@
-from stacks.Stack import Stack
+from stacks_queues.Stack import Stack
 
 
 def well_formed_brackets(s):

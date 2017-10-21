@@ -1,6 +1,6 @@
 import unittest
 
-from search import binary_search_first, int_sq_root
+from search import binary_search_first, int_sq_root, search_2d
 from search import binary_search_cyclic
 from utils import algorithms
 
@@ -32,6 +32,21 @@ class BinarySearch(unittest.TestCase):
             self.assertEqual(3, algo(15))
             self.assertEqual(9, algo(99))
             self.assertEqual(10, algo(100))
+
+    def test_search_2d_matrix(self):
+        for algo in algorithms(search_2d):
+            matrix = [
+                list(range(0, 5)),
+                list(range(5, 10)),
+                list(range(10, 15)),
+                list(range(15, 20)),
+                list(range(20, 25)),
+            ]
+            self.assertEqual(True, algo(matrix, 24))
+            self.assertEqual(False, algo(matrix, -1))
+            self.assertEqual(True, algo(matrix, 3))
+            self.assertEqual(True, algo(matrix, 0))
+            self.assertEqual(False, algo(matrix, 25))
 
 if __name__ == '__main__':
     unittest.main()
