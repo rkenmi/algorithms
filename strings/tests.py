@@ -8,11 +8,11 @@ from utils import algorithms
 class Strings(unittest.TestCase):
     def test_search_text_with_keyword(self):
         for algo in algorithms(search_text_sentences):
-            # text = "Hello Moto."
-            # self.assertEqual(["Hello Moto."], algo(text, "hello"))
-            #
-            # text = "Hella Moto."
-            # self.assertEqual([], algo(text, "Hello"))
+            text = "Hello Moto."
+            self.assertEqual(["Hello Moto."], algo(text, "hello"))
+
+            text = "Hella Moto."
+            self.assertEqual([], algo(text, "Hello"))
 
             text = """Early sales of Apple's new iPhones have lived up to high expectations.
 
