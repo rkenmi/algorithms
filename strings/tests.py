@@ -1,11 +1,20 @@
 import unittest
 from timeit import timeit
 
-from strings import search_text_sentences
+from strings import search_text_sentences, string_transformation
 from utils import algorithms
 
 
 class Strings(unittest.TestCase):
+
+    def test_string_transformation(self):
+        for algo in algorithms(string_transformation):
+            self.assertEqual('abcb', algo('abca'))
+            self.assertEqual('abcbcd', algo('abcaaa'))
+            self.assertEqual('zyab', algo('zyzz'))
+            self.assertEqual('zabcde', algo('zzzzzz'))
+            self.assertEqual('abcdefghijklmnopqrstuvwxyzabcd', algo('a' * 30))
+
     def test_search_text_with_keyword(self):
         for algo in algorithms(search_text_sentences):
             text = "Hello Moto."

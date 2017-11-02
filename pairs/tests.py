@@ -11,6 +11,7 @@ class Pairs(unittest.TestCase):
             self.assertEqual(None, algo([[10, 50], [60, 120], [140, 210]], [[0, 15], [60, 70]], 12))
             self.assertEqual([65, 77], algo([[10, 50], [55, 60], [65, 80], [140, 210]], [[0, 15], [60, 100]], 12))
 
+
     def test_exact_difference(self):
         for algo in algorithms(exact_difference):
             self.assertEqual([[4, 1]], algo([4, 1], 3))
