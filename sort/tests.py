@@ -1,10 +1,23 @@
 import unittest
 
-from sort import merge_sorted_arrays_into_A1, smallest_nonconstructible
+from sort import merge_sorted_arrays_into_A1, smallest_nonconstructible, grades_key_index_counting, fixed_length_strings
 from utils import algorithms
 
 
 class Sorts(unittest.TestCase):
+    def test_fixed_length_strings(self):
+        for algo in algorithms(fixed_length_strings):
+            self.assertEqual(['abc', 'box'], algo(['box', 'abc'], 3))
+            self.assertEqual(['abc', 'box', 'dub', 'wub', 'xox'], algo(['box', 'abc', 'xox', 'dub', 'wub'], 3))
+
+    def test_grades_key_index_counting(self):
+        for algo in algorithms(grades_key_index_counting):
+            self.assertEqual(['A', 'B', 'C'], algo(['B', 'C', 'A']))
+            self.assertEqual(['A', 'A', 'B', 'C'], algo(['B', 'C', 'A', 'A']))
+            self.assertEqual(['A', 'A', 'B', 'B', 'C', 'C', 'D', 'F', 'F', 'F', 'F', 'F'],
+                             algo(['B', 'C', 'F', 'F', 'C', 'D', 'F', 'F', 'A', 'B', 'F', 'A']))
+
+
     def test_smallest_nonconstructible(self):
         # 1 2 4:  1 2 3 4 5 6
         # 1 2 5:  1 2 3 5 6 7
