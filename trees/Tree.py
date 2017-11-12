@@ -25,6 +25,35 @@ class BinaryTree:
 
 class BinarySearchTree(BinaryTree):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def augment(self, count=False):
+        """
+            Give the BST some cool properties, like count of children, parent pointer, etc.
+        :param count:
+        :return:
+        """
+        if count:
+            self._augment_count(self)
+
+    def _augment_count(self, root):
+        """
+            Want to count children for a node? Use Postorder!
+        :param root:
+        :return:
+        """
+        if not root:
+            return 0
+
+        while root:
+            count_left = self._augment_count(root.left)  # <-- L
+            count_right = self._augment_count(root.right)  # <-- R
+            root.count = count_left + count_right + 1  # <-- N
+
+            return root.count
+
+
     def add(self, node):
         parent = None
         root = self

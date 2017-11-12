@@ -3,7 +3,7 @@ import unittest
 from trees.Tree import BinaryTree, BinarySearchTree
 from trees.get_height import get_height
 from trees.is_symmetric import is_symmetric
-from trees import least_common_ancestor
+from trees import least_common_ancestor, get_kth_smallest_bst
 from trees import least_common_ancestor_parents
 from utils import algorithms
 
@@ -99,6 +99,7 @@ class BinarySearchTrees(unittest.TestCase):
         sample.add(BinaryTree(55))
         sample.add(BinaryTree(15))
         sample.add(BinaryTree(11))
+        sample.augment(count=True)
         return sample
 
     def test_get(self):
@@ -116,6 +117,31 @@ class BinarySearchTrees(unittest.TestCase):
         self.assertEqual(11, bst.remove(11).data)
         self.assertEqual(4, get_height(bst))
 
+    def test_kth_smallest_bst(self):
+        bst = self.build_big_tree()
+        for algo in algorithms(get_kth_smallest_bst):
+            node = algo(bst, 1)
+            self.assertEqual(3, node.data)
 
+            node = algo(bst, 2)
+            self.assertEqual(10, node.data)
+
+            node = algo(bst, 3)
+            self.assertEqual(11, node.data)
+
+            node = algo(bst, 4)
+            self.assertEqual(15, node.data)
+
+            node = algo(bst, 5)
+            self.assertEqual(20, node.data)
+
+            node = algo(bst, 6)
+            self.assertEqual(35, node.data)
+
+            node = algo(bst, 7)
+            self.assertEqual(50, node.data)
+
+            node = algo(bst, 8)
+            self.assertEqual(55, node.data)
 if __name__ == '__main__':
     unittest.main()
