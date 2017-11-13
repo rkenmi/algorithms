@@ -1,7 +1,7 @@
 import unittest
 
 from graphs.Graph import Digraph, WeightedDirectedEdge, Vertex
-from graphs.GraphClient import ShortestPath
+from graphs.GraphClient import ShortestPath, DjikstraSP
 
 
 class DigraphCreation(unittest.TestCase):
@@ -23,6 +23,23 @@ class DigraphCreation(unittest.TestCase):
         g = self.build_simple_digraph()
         v1 = g.adj[1][0].get_from()
         sp = ShortestPath(g, v1)
+        self.assertEqual(3.0, sp.dist_to[2])
+        self.assertEqual(8.0, sp.dist_to[3])
+        self.assertEqual(6.0, sp.dist_to[4])
+
+        v4 = g.adj[3][0].get_to()
+        footsteps_from_source = sp.get_path_to(v4)
+
+        self.assertEqual(1, footsteps_from_source[0].id)
+        self.assertEqual(2, footsteps_from_source[1].id)
+        self.assertEqual(4, footsteps_from_source[2].id)
+
+        self.assertEqual(6.0, sp.get_dist_to(v4))
+
+    def test_djikstra_shortest_paths(self):
+        g = self.build_simple_digraph()
+        v1 = g.adj[1][0].get_from()
+        sp = DjikstraSP(g, v1)
         self.assertEqual(3.0, sp.dist_to[2])
         self.assertEqual(8.0, sp.dist_to[3])
         self.assertEqual(6.0, sp.dist_to[4])

@@ -1,17 +1,16 @@
 import math
 
+from graphs.Graph import WeightedDirectedEdge
+
 
 class ShortestPath:
     def __init__(self, G, source):
         self.G = G  # graph
         self.source = source  # source vertex
-        self.dist_to = [0] * G.size()  # the distance to the vertex id FROM THE SOURCE
+        self.dist_to = [math.inf] * G.size()  # the distance to the vertex id FROM THE SOURCE
         self.edge_to = [None] * G.size()  # the last edge that connects to vertex id (not necessarily from the source!)
 
-        for i in range(len(self.dist_to)):
-            if i != source.id:  # dist to itself is always 0
-                self.dist_to[i] = math.inf
-
+        self.dist_to[source.id] = 0
         queue = [G.adj[source.id]]
 
         while queue:
@@ -48,3 +47,40 @@ class ShortestPath:
 
     def get_dist_to(self, v):
         return self.dist_to[v.id]
+
+
+import heapq
+class DjikstraSP(ShortestPath):
+    def __init__(self, G, source):
+        self.dist_to = [math.inf] * G.size()
+        self.edge_to = [None] * G.size()
+
+        self.dist_to[source.id] = 0
+
+        self.heap = [( 0 , source )]
+
+        while self.heap:
+            tup = heapq.heappop(self.heap)
+            adj = G.adj[tup[1].id]
+            if adj is None:
+                continue
+
+            for edge in adj:
+                self._relax(edge)
+                self._update_heap(edge.get_to())
+
+    def _update_heap(self, w):
+        """
+            Update the heap with the newest distance for w, the node to move to.
+        :param w:
+        :return:
+        """
+        exists = False
+        for i, pair in enumerate(self.heap):
+            if w.id == pair[1].id:
+                self.heap[i] = (self.dist_to[w.id], w)
+                exists = True
+        if not exists:
+            heapq.heappush(self.heap, (self.dist_to[w.id], w))
+
+
