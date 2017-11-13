@@ -9,6 +9,9 @@ def kth_smallest_aug(root, k):
     if not root:
         return
 
+    if k == 0:
+        return root
+
     leftnum = 0
     if root.left:
         leftnum = root.left.count
@@ -53,5 +56,5 @@ def kth_smallest_inorder(root, k):
 
         return None, k
 
-    return _lnr_k(root, k)[0]
+    return _lnr_k(root, k)[0] if k > 0 else root
 
