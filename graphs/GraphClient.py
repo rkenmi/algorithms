@@ -51,6 +51,10 @@ class ShortestPath:
 
 import heapq
 class DjikstraSP(ShortestPath):
+    """
+        Restriction: No negative weights
+        Performance: Good; O(E logV).
+    """
     def __init__(self, G, source):
         self.dist_to = [math.inf] * G.size()
         self.edge_to = [None] * G.size()
@@ -82,5 +86,60 @@ class DjikstraSP(ShortestPath):
                 exists = True
         if not exists:
             heapq.heappush(self.heap, (self.dist_to[w.id], w))
+
+
+class BellmanFordSP(ShortestPath):
+    """
+        Restriction: No negative cycles
+        Performance: Pretty slow; O(E * V). Can be improved significantly with a queue.
+    """
+    def __init__(self, G, source):
+        self.G = G  # graph
+        self.source = source  # source vertex
+        self.dist_to = [math.inf] * G.size()  # the distance to the vertex id FROM THE SOURCE
+        self.edge_to = [None] * G.size()  # the last edge that connects to vertex id (not necessarily from the source!)
+        self.dist_to[source.id] = 0
+
+        for i in range(G.size()):
+            for edges in G:
+                for edge in edges:
+                    self._relax(edge)
+
+
+class TopologicalSP(ShortestPath):
+    """
+        Restriction: No directed cycles. Can handle negative weights, unlike Djikstra's.
+        Performance: Linear O(V + E), but you need O(V) space to track visited vertices.
+    """
+    def __init__(self, G, source):
+        self.G = G  # graph
+        self.source = source  # source vertex
+        self.dist_to = [math.inf] * G.size()  # the distance to the vertex id FROM THE SOURCE
+        self.edge_to = [None] * G.size()  # the last edge that connects to vertex id (not necessarily from the source!)
+        self.dist_to[source.id] = 0
+
+        order = self._get_topological_order()
+        for vertex in order:
+            edges = G.adj[vertex.id]
+            if edges:
+                for edge in edges:
+                    self._relax(edge)
+
+    def _get_topological_order(self):
+        visited = [False] * self.G.size()
+        stack = [self.source]
+        order = []
+        while stack:
+            node = stack.pop()
+            edges = self.G.adj[node.id]
+            if edges:
+                for edge in edges:
+                    if not visited[edge.get_to().id]:
+                        stack.append(edge.get_to())
+
+            if not visited[node.id]:
+                order.append(node)
+                visited[node.id] = True
+        return order
 
 
