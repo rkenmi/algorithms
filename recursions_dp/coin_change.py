@@ -1,5 +1,19 @@
+def coin_change(coins, amount):
 
-def coin_change_dynamic(coins, amount):
+    def _coin_change(coins, amount, i):
+        if i >= len(coins):
+            return 0
+
+        if amount == 0:
+            return 1
+        elif amount < 0:
+            return 0
+        else:
+            return _coin_change(coins, amount-coins[i], i) + _coin_change(coins, amount, i+1)
+
+    return _coin_change(coins, amount, 0)
+
+def coin_change_dynamic2(coins, amount):
 
     amount_arr = [-1] * (amount+1)
     adj_matrix = [amount_arr for _ in range(len(coins)+1)]

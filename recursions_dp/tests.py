@@ -1,6 +1,6 @@
 import unittest
 
-from recursions_dp import deletion_distance
+from recursions_dp import deletion_distance, coin_change
 from utils import algorithms
 
 
@@ -16,6 +16,15 @@ class Recursions(unittest.TestCase):
             self.assertEqual(1, algo("abc", "adbc"))
             self.assertEqual(0, algo("awesome", "awesome"))
             self.assertEqual(2, algo("ab", "ba"))
+
+    def test_coin_change(self):
+        for algo in algorithms(coin_change):
+            self.assertEqual(2, algo([1, 5, 10, 25], 5))
+            self.assertEqual(4, algo([1, 5, 10, 25], 10))
+            self.assertEqual(242, algo([1, 5, 10, 25], 100))
+            self.assertEqual(1463, algo([1, 5, 10, 25], 200))
+            self.assertEqual(19006, algo([1, 5, 10, 25], 500))
+            #self.assertEqual(142511, algo([1, 5, 10, 25], 1000))  # only true DP solution works here
 
 """
 
