@@ -3,7 +3,7 @@ import unittest
 from trees.Tree import BinaryTree, BinarySearchTree
 from trees.get_height import get_height
 from trees.is_symmetric import is_symmetric
-from trees import least_common_ancestor, get_kth_smallest_bst, get_kth_largest_bst, lca_bst
+from trees import least_common_ancestor, get_kth_smallest_bst, get_kth_largest_bst, lca_bst, sorted_array_to_minh_bst
 from trees import least_common_ancestor_parents
 from utils import algorithms
 
@@ -124,6 +124,23 @@ class BinarySearchTrees(unittest.TestCase):
             self.assertEqual(bst.right, algo(bst, bst.right.left, bst.right.right))
             # a node can be a descendent of itself
             self.assertEqual(bst.right.left, algo(bst, bst.right.left, bst.right.left.right))
+
+    def test_sorted_array_to_minh_bst(self):
+        for algo in algorithms(sorted_array_to_minh_bst):
+            root = algo([1, 2, 3, 4])
+            self.assertEqual(3, root.data)
+            self.assertEqual(1, root.left.data)
+            self.assertEqual(2, root.left.right.data)
+            self.assertEqual(4, root.right.data)
+
+            root = algo([8, 10, 15, 17, 19, 22, 25])
+            self.assertEqual(17, root.data)
+            self.assertEqual(10, root.left.data)
+            self.assertEqual(8, root.left.left.data)
+            self.assertEqual(15, root.left.right.data)
+            self.assertEqual(22, root.right.data)
+            self.assertEqual(19, root.right.left.data)
+            self.assertEqual(25, root.right.right.data)
 
     def test_kth_smallest_bst(self):
         bst = self.build_big_tree()

@@ -1,7 +1,17 @@
 import unittest
 
-from recursions_dp import deletion_distance, coin_change
+from recursions_dp import deletion_distance, coin_change, max_subarray_sum
 from utils import algorithms
+
+
+class DP(unittest.TestCase):
+    def test_deletion_distance(self):
+        for algo in algorithms(max_subarray_sum):
+            self.assertEqual(300, algo([300]))
+            self.assertEqual(300, algo([300, -12]))
+            self.assertEqual(300, algo([0, 300, -12]))
+            self.assertEqual(300, algo([-30, 300, -12]))
+            self.assertEqual(1479, algo([904, 40, 523, 12, -335, -385, -124, 481, -31]))
 
 
 class Recursions(unittest.TestCase):
