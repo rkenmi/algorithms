@@ -1,6 +1,6 @@
 import unittest
 
-from heaps import merge_sorted_sequences
+from heaps import merge_sorted_sequences, sort_k_inc_dec
 from utils import algorithms
 
 
@@ -47,6 +47,17 @@ class Heaps(unittest.TestCase):
                 [-100, -50, 0, 50, 100, 150]
             ]
             self.assertEqual([-100, -50, 0, 0, 1, 2, 50, 99, 100, 100, 101, 150, 300, 310, 320], algo(sequences))
+
+    def test_sort_k_increasing_decreasing(self):
+        for algo in algorithms(sort_k_inc_dec):
+            A = [1, 2, 3, 4, 5]
+            self.assertEqual(A, algo(A))
+
+            self.assertEqual([2, 3, 4], algo([4, 3, 2]))
+
+            self.assertEqual([1, 2, 3, 5, 6, 7], algo([1, 2, 3, 7, 6, 5]))
+
+            self.assertEqual([1, 2, 3, 5, 6, 7], algo([1, 3, 2, 7, 6, 5]))
 
 
 if __name__ == '__main__':
