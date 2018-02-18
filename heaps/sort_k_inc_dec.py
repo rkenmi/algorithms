@@ -7,7 +7,7 @@ INCREASING = 1
 def sort_k_inc_dec(A):
     """
     Given an k-increasing-decreasing array, sort the array.
-    
+
     For example, [1, 2, 6, 4, 2, 3] is a 3-increasing-decreasing array because it increases
     once from [1, 2], decreases from [6, 4], then increases again from [2, 3].
 
@@ -17,10 +17,10 @@ def sort_k_inc_dec(A):
     if not A:
         return
 
-    prev = A[0]
-    begin = 0
     decreasing, increasing = [], []  # indices to start from
+    begin = 0
     mode = None
+    prev = A[0]
     for i in range(1, len(A)):
         val = A[i]
         if mode is None:
@@ -30,13 +30,13 @@ def sort_k_inc_dec(A):
                 increasing.append([begin, i-1])
                 begin = i
                 mode = None
-            elif mode == DECREASING and val >= prev:
+            elif mode == DECREASING and val > prev:
                 decreasing.append([begin, i-1])
                 begin = i
                 mode = None
         prev = val
 
-    if mode is INCREASING:
+    if mode is INCREASING or mode is None:  # include duplicates in increasing array
         increasing.append([begin, len(A)-1])
     elif mode is DECREASING:
         decreasing.append([begin, len(A)-1])

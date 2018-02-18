@@ -59,6 +59,8 @@ class Heaps(unittest.TestCase):
 
             self.assertEqual([1, 2, 3, 5, 6, 7], algo([1, 3, 2, 7, 6, 5]))
 
+            self.assertEqual([1, 2, 2, 3, 5, 6], algo([1, 3, 2, 2, 6, 5]))
+
 
 if __name__ == '__main__':
     unittest.main()
