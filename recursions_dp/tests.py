@@ -32,8 +32,8 @@ class Recursions(unittest.TestCase):
             self.assertEqual(0, algo("", ""))
             self.assertEqual(3, algo("hit", ""))
             self.assertEqual(4, algo("", "hear"))
-            self.assertEqual(3, algo("heat", "hit"))
-            self.assertEqual(2, algo("hot", "not"))
+            self.assertEqual(2, algo("heat", "hit"))
+            self.assertEqual(1, algo("hot", "not"))
             self.assertEqual(5, algo("some", "thing")) # substitute 'some' for 'thin' and add 'g' = 5
             self.assertEqual(1, algo("abc", "adbc"))
             self.assertEqual(0, algo("awesome", "awesome"))

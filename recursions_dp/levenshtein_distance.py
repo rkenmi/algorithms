@@ -11,19 +11,21 @@ def levenshtein_dp(str1, str2):
         return max(len(str1), len(str2))
 
     dp = [[0] * (len(str2) + 1) for _ in range(len(str1) + 1)]
+    for i in range(0, len(str1)+1):
+        dp[i][0] = i
 
-    for i in range(len(str1) + 1):
-        for j in range(len(str2) + 1):
-            if i > 0 and j > 0 and str1[i-1] == str2[j-1]:
+    for j in range(0, len(str2)+1):
+        dp[0][j] = j
+
+    for i in range(0, len(str1) + 1):
+        for j in range(1, len(str2) + 1):
+            if str1[i-1] == str2[j-1]:
                 dp[i][j] = dp[i-1][j-1]
             else:
-                left, up = 0, 0
-                if i > 0:
-                    left = dp[i-1][j]
-                if j > 0:
-                    up = dp[i][j-1]
+                left = dp[i-1][j]
+                up = dp[i][j-1]
+                upleft = dp[i-1][j-1]
 
-                if i > 0 or j > 0:
-                    dp[i][j] = 1 + min(left, up)
+                dp[i][j] = 1 + min(left, up, upleft)
 
     return dp[len(str1)][len(str2)]
