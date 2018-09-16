@@ -1,6 +1,6 @@
 import unittest
 
-from recursions_dp import deletion_distance, coin_change, max_subarray_sum
+from recursions_dp import deletion_distance, coin_change, max_subarray_sum, levenshtein_distance
 from utils import algorithms
 
 
@@ -22,7 +22,19 @@ class Recursions(unittest.TestCase):
             self.assertEqual(4, algo("", "hear"))
             self.assertEqual(3, algo("heat", "hit"))
             self.assertEqual(2, algo("hot", "not"))
-            self.assertEqual(9, algo("some", "thing"))
+            self.assertEqual(9, algo("some", "thing"))  # must delete 'some' and 'thing' for them to be both empty strings
+            self.assertEqual(1, algo("abc", "adbc"))
+            self.assertEqual(0, algo("awesome", "awesome"))
+            self.assertEqual(2, algo("ab", "ba"))
+
+    def test_levenshtein_distance(self):
+        for algo in algorithms(levenshtein_distance):
+            self.assertEqual(0, algo("", ""))
+            self.assertEqual(3, algo("hit", ""))
+            self.assertEqual(4, algo("", "hear"))
+            self.assertEqual(3, algo("heat", "hit"))
+            self.assertEqual(2, algo("hot", "not"))
+            self.assertEqual(5, algo("some", "thing")) # substitute 'some' for 'thin' and add 'g' = 5
             self.assertEqual(1, algo("abc", "adbc"))
             self.assertEqual(0, algo("awesome", "awesome"))
             self.assertEqual(2, algo("ab", "ba"))
