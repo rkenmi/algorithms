@@ -1,5 +1,5 @@
 def rotate_2d_array(A):
-    for j in range(0, len(A) - 2):
+    for j in range(0, len(A) // 2):
         for i in range(j, len(A) - 1 - j):
             old = A[j][i]
             # Preserve the old value of new block and overwrite the old value with the previous preserved value
