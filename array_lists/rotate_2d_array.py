@@ -1,33 +1,21 @@
-def rotate_2d_array(arr):
-    if len(arr) == 0:
-        return arr
+def rotate_2d_array(A):
+    for j in range(0, len(A) - 2):
+        for i in range(j, len(A) - 1 - j):
+            old = A[j][i]
+            # Preserve the old value of new block and overwrite the old value with the previous preserved value
+            A[i][~j], old = old, A[i][~j]
+            A[~j][~i], old = old, A[~j][~i]
+            A[~i][j], old = old, A[~i][j]
 
-    if len(arr) != len(arr[0]):
-        return arr
+            A[j][i] = old
 
-    begin, end, laps = 0, len(arr), len(arr)-1
-    while begin < end:
-        print(begin, end)
-        for _ in range(0, laps):
-            old = arr[begin+1][begin]
-            for i in range(begin, end):
-                arr[begin][i], old = old, arr[begin][i]
-            print(arr)
+    return A
 
-            for i in range(begin + 1, end):
-                arr[i][end - 1], old = old, arr[i][end - 1]
-            print(arr)
+def rotate_2d_array_brute_force(A):
+    copy = [[0] * len(A) for _ in range(0, len(A))]
 
-            for i in range(begin + 1, end):
-                arr[end - 1][end - 1 - i], old = old, arr[end - 1][end - 1 - i]
-            print(arr)
-            print(begin, end)
-            for i in range(begin + 1, end - 1):
-                arr[end - 1 - i][begin], old = old, arr[end - 1 - i][begin]
+    for j in range(0, len(A)):
+        for i in range(0, len(A)):
+            copy[i][j] = A[~j][i]
 
-        print(arr)
-        laps -= 2
-        begin += 1
-        end -= 1
-
-    return arr
+    return copy
