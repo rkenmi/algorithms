@@ -5,6 +5,7 @@ def algorithms(module):
     :param module:
     :return:
     """
-    l = [getattr(module, attr) for attr in dir(module) if callable(getattr(module, attr))]
+    blacklist = ['deque', 'defaultdict', 'namedtuple', 'OrderedDict']
+    l = [getattr(module, attr) for attr in filter(lambda x: x not in blacklist, dir(module)) if callable(getattr(module, attr))]
     assert l
     return l

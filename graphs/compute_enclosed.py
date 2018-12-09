@@ -1,6 +1,6 @@
 
+from collections import deque
 def compute_enclosed(A):
-    from collections import deque
     n = len(A)  # vertical boundaries
     m = len(A[0])  # horizontal boundaries
 
