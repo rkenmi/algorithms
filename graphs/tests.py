@@ -1,7 +1,9 @@
 import unittest
 
+from graphs import compute_enclosed
 from graphs.Graph import Digraph, WeightedDirectedEdge, Vertex
 from graphs.GraphClient import ShortestPath, DjikstraSP, BellmanFordSP, TopologicalSP
+from utils import algorithms
 
 
 class DigraphCreation(unittest.TestCase):
@@ -61,5 +63,33 @@ class DigraphCreation(unittest.TestCase):
         self._graph_tester(g, sp)
 
 
+class Graphs(unittest.TestCase):
+    def test_compute_enclosed(self):
+        for algo in algorithms(compute_enclosed):
+            A = [
+                ['W', 'W', 'W'],
+                ['W', 'B', 'W'],
+                ['W', 'W', 'W'],
+            ]
+            self.assertEqual(algo(A), A)
+
+            B = [
+                ['W', 'W', 'W', 'B', 'W'],
+                ['W', 'B', 'B', 'B', 'B'],
+                ['W', 'B', 'B', 'B', 'B'],
+                ['B', 'W', 'W', 'W', 'B'],
+                ['B', 'B', 'B', 'B', 'B'],
+            ]
+
+            B_transformed = [
+                ['W', 'W', 'W', 'B', 'W'],
+                ['W', 'B', 'B', 'B', 'B'],
+                ['W', 'B', 'B', 'B', 'B'],
+                ['B', 'B', 'B', 'B', 'B'],
+                ['B', 'B', 'B', 'B', 'B'],
+            ]
+            self.assertEqual(algo(B), B_transformed)
+
 if __name__ == '__main__':
     unittest.main()
+
