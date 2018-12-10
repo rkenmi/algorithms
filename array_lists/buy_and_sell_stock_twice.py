@@ -1,40 +1,33 @@
-import math
-
-
-def buy_and_sell_stock_twice_naive(A):
-    if not A:
-        return 0
-
-    min_1st_price, max_1st_profit = math.inf, 0
-    max_overall_profit = 0
-    for i in range(0, len(A)):
-        max_1st_profit = max(A[i] - min_1st_price, max_1st_profit)
-        min_1st_price = min(A[i], min_1st_price)
-
-        min_2nd_price, max_2nd_profit = math.inf, 0
-        for j in range(i + 1, len(A)):
-            max_2nd_profit = max(A[j] - min_2nd_price, max_2nd_profit)
-            min_2nd_price = min(A[j], min_2nd_price)
-
-        max_overall_profit = max(max_1st_profit + max_2nd_profit, max_overall_profit)
-
-    return max_overall_profit
-
-
 def buy_and_sell_stock_twice(A):
-    profits = [0] * len(A)
-    min_price = math.inf
+    profit = 0
+    min_so_far = A[0]
 
-    for i, num in enumerate(A):
-        profits[i] = num - min_price
-        min_price = min(num, min_price)
+    running_profit_fwd = []
+    running_profit_bwd = []
 
-    max_profit_1, max_profit_2 = 0, 0
-    for stock in reversed(profits):
-        if stock > max_profit_1:
-            max_profit_2 = max_profit_1
-            max_profit_1 = stock
-        elif stock > max_profit_2:
-            max_profit_2 = stock
+    for num in A:
+        if num < min_so_far:
+            min_so_far = num
+        profit = max(profit, num - min_so_far)
+        running_profit_fwd.append(profit)
 
-    return max_profit_1 + max_profit_2
+    max_so_far = A[-1]
+    profit = 0
+    for num in reversed(A):
+        if num >= max_so_far:
+            max_so_far = num
+        profit = max(profit, max_so_far - num)
+        running_profit_bwd.append(profit)
+
+    running_profit_bwd = running_profit_bwd[::-1]
+
+    total_profits = []
+    for i, num in enumerate(running_profit_bwd):
+        if i == 0:
+            total_profits.append(running_profit_bwd[i])
+        else:
+            total_profits.append(running_profit_bwd[i] + running_profit_fwd[i-1])
+
+    return max(total_profits)
+
+
