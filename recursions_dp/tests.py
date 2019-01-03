@@ -1,6 +1,6 @@
 import unittest
 
-from recursions_dp import deletion_distance, coin_change, max_subarray_sum, levenshtein_distance
+from recursions_dp import deletion_distance, coin_change, max_subarray_sum, levenshtein_distance, hanoi
 from utils import algorithms
 
 
@@ -47,6 +47,13 @@ class Recursions(unittest.TestCase):
             self.assertEqual(1463, algo([1, 5, 10, 25], 200))
             self.assertEqual(19006, algo([1, 5, 10, 25], 500))
             #self.assertEqual(142511, algo([1, 5, 10, 25], 1000))  # only true DP solution works here
+
+    def test_hanoi(self):
+        for algo in algorithms(hanoi):
+            self.assertEqual(3, algo(2))
+            self.assertEqual(7, algo(3))
+            self.assertEqual(15, algo(4))
+
 
 """
 

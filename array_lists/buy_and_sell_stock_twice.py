@@ -11,8 +11,9 @@ def buy_and_sell_stock_twice(A):
         profit = max(profit, num - min_so_far)
         running_profit_fwd.append(profit)
 
-    max_so_far = A[-1]
     profit = 0
+    max_so_far = A[-1]
+
     for num in reversed(A):
         if num >= max_so_far:
             max_so_far = num
@@ -21,12 +22,9 @@ def buy_and_sell_stock_twice(A):
 
     running_profit_bwd = running_profit_bwd[::-1]
 
-    total_profits = []
-    for i, num in enumerate(running_profit_bwd):
-        if i == 0:
-            total_profits.append(running_profit_bwd[i])
-        else:
-            total_profits.append(running_profit_bwd[i] + running_profit_fwd[i-1])
+    total_profits = [running_profit_bwd[0]]
+    for i in range(1, len(running_profit_bwd)):
+        total_profits.append(running_profit_bwd[i] + running_profit_fwd[i-1])
 
     return max(total_profits)
 

@@ -1,7 +1,8 @@
 import unittest
 from timeit import timeit
 
-from strings import search_text_sentences, string_transformation
+from strings import search_text_sentences, string_transformation, find_string_decomposition, \
+    find_longest_substring_without_dupes
 from utils import algorithms
 
 
@@ -50,6 +51,22 @@ class Strings(unittest.TestCase):
                               ' or smartphones with screens measuring at least 5-point-5 diagonal inches, '
                               'than laptops.'], algo(text, "pHaBlEts"))
 
+    def test_find_string_decomposition(self):
+        for algo in algorithms(find_string_decomposition):
+            self.assertEqual(algo('abcdefg', ['bcd', 'efg']), 1)
+            self.assertEqual(algo('abcdefg', ['fg', 'de']), 3)
+            self.assertEqual(algo('booga booga', ['oog', 'oog', 'a b']), 1)
+            self.assertEqual(algo('booga booga', ['oog', 'oog', 'axb']), -1)
+            self.assertEqual(algo('amanaplanacanal', ['can', 'apl', 'ana']), 4)
+
+    def test_find_longest_substring_without_dupes(self):
+        for algo in algorithms(find_longest_substring_without_dupes):
+            self.assertEqual(algo('abcdefg'), 'abcdefg')
+            self.assertEqual(algo('abcdeabc'), 'abcde')
+            self.assertEqual(algo('abcabc'), 'abc')
+            self.assertEqual(algo('a'), 'a')
+            self.assertEqual(algo(''), '')
+            self.assertEqual(algo('abcdeabcdefghijkabc'), 'abcdefghijk')
 
 if __name__ == '__main__':
     unittest.main()

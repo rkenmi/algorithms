@@ -22,9 +22,10 @@ class LRUCacheD(unittest.TestCase):
             d.put('Kappa', 3.8)
             d.put('James', 3.0)
             d.put('John', 3.9)
+            d.put('Durant', 2.0)
             d.put('Gabe', 2.1)
             self.assertEqual(None, d.get('Rogers'))
-            self.assertEqual(2.5, d.get('Durant'))
+            self.assertEqual(2.0, d.get('Durant'))
             self.assertEqual(2.1, d.get('Gabe'))
 
             if getattr(d, '_reset_counter', None):

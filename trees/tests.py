@@ -3,7 +3,8 @@ import unittest
 from trees.Tree import BinaryTree, BinarySearchTree
 from trees.get_height import get_height
 from trees.is_symmetric import is_symmetric
-from trees import least_common_ancestor, get_kth_smallest_bst, get_kth_largest_bst, lca_bst, sorted_array_to_minh_bst
+from trees import least_common_ancestor, get_kth_smallest_bst, get_kth_largest_bst, lca_bst, sorted_array_to_minh_bst, \
+    preorder_iterative
 from trees import least_common_ancestor_parents
 from utils import algorithms
 
@@ -79,6 +80,12 @@ class BinaryTrees(unittest.TestCase):
             self.assertEqual(tree.left,algo(tree.left.left, tree.left.right))
             self.assertEqual(tree, algo(tree.left.left, tree.right))
             self.assertEqual(tree.left.left, algo(tree.left.left.left, tree.left.left))
+
+    def test_preorder_iterative(self):
+        tree = self.build_basic_tree_parents()
+        for algo in algorithms(preorder_iterative):
+            self.assertEqual(algo(tree), [0, 1, 3, 5, 4, 2])
+
 
 
 class BinarySearchTrees(unittest.TestCase):

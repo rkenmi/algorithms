@@ -1,6 +1,6 @@
 import unittest
 
-from graphs import compute_enclosed
+from graphs import compute_enclosed, find_cycle_in_dag
 from graphs.Graph import Digraph, WeightedDirectedEdge, Vertex
 from graphs.GraphClient import ShortestPath, DjikstraSP, BellmanFordSP, TopologicalSP
 from utils import algorithms
@@ -89,6 +89,25 @@ class Graphs(unittest.TestCase):
                 ['B', 'B', 'B', 'B', 'B'],
             ]
             self.assertEqual(algo(B), B_transformed)
+
+    def test_find_cycle_in_dag(self):
+
+        class ProcessVertex:
+            def __init__(self, processes):
+                self.processes = processes
+
+        B = ProcessVertex([])
+        A = ProcessVertex([B])
+        C = ProcessVertex([])
+        D = ProcessVertex([C, A])
+        F = ProcessVertex([D, B])
+        E = ProcessVertex([F])
+        for algo in algorithms(find_cycle_in_dag):
+            # self.assertEqual(algo(B), False)
+            # self.assertEqual(algo(E), False)
+            B.processes = [E]
+            self.assertEqual(algo(E), True)
+
 
 if __name__ == '__main__':
     unittest.main()
