@@ -14,6 +14,16 @@ class ListNode:
 
         print(" => ".join(to_print))
 
+    def __eq__(self, other):
+        this = self
+        while this and other:
+            if this.data != other.data:
+                return False
+            this = this.next
+            other = other.next
+
+        return True
+
 sample = ListNode()
 sample.next = ListNode(1)
 sample.next.next = ListNode(2)
