@@ -2,7 +2,7 @@ import unittest
 
 # from array_lists import longest_increasing_subsequence
 from array_lists import next_greatest, buy_and_sell_stock, longest_increasing_subsequence, buy_and_sell_stock_twice, \
-    rotate_2d_array
+    rotate_2d_array, min_in_rotated_sorted_array
 from utils import algorithms
 
 class Lists(unittest.TestCase):
@@ -17,6 +17,14 @@ class Lists(unittest.TestCase):
             self.assertEqual(2, algo([3, 4, 2, 4, 0]))
             self.assertEqual(0, algo([5, 4, 3, 2, 1]))
             self.assertEqual(0, algo([]))
+
+    def test_min_in_rotated_sorted_array(self):
+        for algo in algorithms(min_in_rotated_sorted_array):
+            self.assertEqual(0, algo([1, 2, 3, 4, 5]))
+            self.assertEqual(1, algo([9, 2, 3, 4, 5]))
+            self.assertEqual(2, algo([9, 10, 3, 4, 5]))
+            self.assertEqual(3, algo([9, 10, 11, 4, 5]))
+            self.assertEqual(4, algo([9, 10, 11, 12, 5]))
 
     def test_buy_sell_stocks_twice(self):
         for algo in algorithms(buy_and_sell_stock_twice):
