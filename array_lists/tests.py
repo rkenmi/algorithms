@@ -81,8 +81,8 @@ class Lists(unittest.TestCase):
 
     def test_replace_all(self):
         for algo in algorithms(replace_all):
-            self.assertEqual(algo("hi neighbor"), "hiblankneighbor")
-            self.assertEqual(algo("h w u t"), "hblankwblankublankt")
+            self.assertEqual(algo(list("hi neighbor") + ([None] * len("blank")), "blank"), "hiblankneighbor")
+            self.assertEqual(algo(list("h w u t") + ([None] * len("a" * 4)), "a"), "hawauat")
 
 if __name__ == '__main__':
     unittest.main()
