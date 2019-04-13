@@ -2,7 +2,7 @@ import unittest
 
 # from array_lists import longest_increasing_subsequence
 from array_lists import next_greatest, buy_and_sell_stock, longest_increasing_subsequence, buy_and_sell_stock_twice, \
-    rotate_2d_array, min_in_rotated_sorted_array
+    rotate_2d_array, min_in_rotated_sorted_array, find_max_min_path, replace_all
 from utils import algorithms
 
 class Lists(unittest.TestCase):
@@ -38,6 +38,14 @@ class Lists(unittest.TestCase):
             self.assertEqual(algo([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10],[11, 12, 13, 14, 15], [16, 17, 18, 19, 20], [21, 22, 23, 24, 25]]),
                              [[21, 16, 11, 6, 1], [22, 17, 12, 7, 2], [23, 18, 13, 8, 3], [24, 19, 14, 9, 4], [25, 20, 15, 10, 5]])
 
+    def test_find_max_min_path(self):
+        for algo in algorithms(find_max_min_path):
+            self.assertEqual(1, algo([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+            self.assertEqual(4, algo([[8, 2, 3], [4, 5, 6], [7, 8, 9]]))
+            self.assertEqual(5, algo([[8, 6, 3], [4, 5, 6], [7, 8, 9]]))
+            self.assertEqual(0, algo([[8, 6, 3], [4, 5, 6], [7, 8, 0]]))
+            self.assertEqual(3, algo([[8, 6, 3], [4, 0, 6]]))
+
     def test_next_greatest(self):
         for algo in algorithms(next_greatest):
             self.assertDictEqual({
@@ -70,6 +78,11 @@ class Lists(unittest.TestCase):
                 1: None,
                 2: None
             }, algo([2, 1, 0]))
+
+    def test_replace_all(self):
+        for algo in algorithms(replace_all):
+            self.assertEqual(algo("hi neighbor"), "hiblankneighbor")
+            self.assertEqual(algo("h w u t"), "hblankwblankublankt")
 
 if __name__ == '__main__':
     unittest.main()
