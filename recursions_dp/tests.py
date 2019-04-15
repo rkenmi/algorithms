@@ -1,6 +1,7 @@
 import unittest
 
-from recursions_dp import deletion_distance, coin_change, max_subarray_sum, levenshtein_distance, hanoi
+from recursions_dp import deletion_distance, coin_change, max_subarray_sum, levenshtein_distance, hanoi, \
+    longest_common_sequence
 from utils import algorithms
 
 
@@ -53,6 +54,13 @@ class Recursions(unittest.TestCase):
             self.assertEqual(3, algo(2))
             self.assertEqual(7, algo(3))
             self.assertEqual(15, algo(4))
+
+    def test_lcs(self):
+        for algo in algorithms(longest_common_sequence):
+            self.assertEqual(algo("ab", "a"), 1)
+            self.assertEqual(algo("abca", "aa"), 2)
+            self.assertEqual(algo("LBCDEAB", "ZLABECA"), 4)
+            self.assertEqual(algo("LBCDEAB", "ZLABEC"), 3)
 
 
 """

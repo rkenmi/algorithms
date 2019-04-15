@@ -10,7 +10,6 @@ def replace_all(A, word):
             break
         size += 1
 
-    # the word 'blank' is 5 characters, but we want to replace the 'space', so allocate 4 characters per 'space'
     last_char_ptr = size
     final_char_ptr = final_size = size + ((len(word) - 1) * blanks)
 
